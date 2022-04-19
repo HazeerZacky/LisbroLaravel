@@ -19,44 +19,28 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">&#9776; Class Form</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="exampleModalLabel">&#9776; User Add Form</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
             <!-- form start -->
                     <form role="form" action="/addclass" method="post">
                     @csrf
                         <div class="form-group">
-                            <label for="exampleInputText" class="form-label">Class Name</label>
-                            <input type="text" class="form-control"name="CName" placeholder="Enter class name">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
+
                         <div class="form-group">
-                        <label>Class Type</label>
-                            <select class="form-control select2" name="CType" data-placeholder="Select an option">
-                                <option value="" selected disabled hidden>(select an option)</option>
-                                <option value="GCE-A/L"><b>GCE Advanced Level</b></option>
-                                <option value="GCE-O/L"><b>GCE Ordinary Level</b></option>
-                                <option value="SecondaryLevel"><b>Secondary Level</b></option>
-                                <option value="PrimaryLevel"><b>Primary Level</b></option>
-                            </select>
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1">
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputText" class="form-label">Status</label><br>
-                            <div class="custom-control custom-radio custom-control-inline">
-                              <input type="radio" id="customRadioInline1" value="Active" name="CStatus" class="custom-control-input">
-                              <label class="custom-control-label" for="customRadioInline1">Active</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                              <input type="radio" id="customRadioInline2" value="Deactive" name="CStatus" class="custom-control-input">
-                              <label class="custom-control-label" for="customRadioInline2">Deactive</label>
-                            </div>
-                        </div>
+                        
+                        
                         </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary ">Save changes</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
                                 </div> 
                             </div>
                     </form>
