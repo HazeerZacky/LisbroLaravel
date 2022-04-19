@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Test</title>
@@ -40,36 +41,74 @@
                         </div>
                         </div>
                                 <div class="modal-footer">
+                                    
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                                 </div> 
                             </div>
                     </form>
-                    <!-- <form role="form" action="/adduser" method="post">
-                        @csrf
-                        <div class="form-group">
-                            <label for="UName" class="form-label">Name</label>
-                            <input type="text" class="form-control" name="UName" placeholder="Enter full name">
-                        </div>
-                        <div class="form-group">
-                            <label for="UEmail" class="form-label">E-mail</label>
-                            <input type="email" class="form-control" name="UEmail" placeholder="Enter e-mail address">
-                        </div>
-                        <div class="form-group">
-                            <label for="UPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" name="UPassword" placeholder="Enter password">
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary ">Save changes</button>
-                </div>
-            </div>
-            </form> -->
             
         </div>
         </div>
   <!-- Add Model End -->
+
+  <!-- Edit Model Start -->
+  <div class="modal fade" id="EditUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">&#9776; Users Form</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </button>
+            </div>
+            <div class="modal-body">
+            <!-- form start -->
+                    <form role="form" action="/edituser" method="post">
+                    @csrf
+                        <div class="form-group">
+                            <label for="exampleInputText" class="form-label">ID</label>
+                            <input type="text" class="form-control" id="EUID" name="EUID" placeholder="Enter class name" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputText" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="EUName" name="EUName" placeholder="Enter name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="EUEmail" name="EUEmail" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="EUPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="EUPassword" name="EUPassword" placeholder="Enter password">
+                        </div>
+              </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div> 
+                            </div>
+                    </form>
+        </div>
+        </div>
+
+        <!-- Edit Model Get Function Start-->
+        <script>
+          function edit(i) {
+            var id = document.getElementById('id' +i).value;
+            var name = document.getElementById('name' +i).value;
+            var email = document.getElementById('email' +i).value;
+            var pw = document.getElementById('pw' +i).value;
+
+
+            document.getElementById('EUID').value = id;
+            document.getElementById('EUName').value = name;
+            document.getElementById('EUEmail').value = email;
+            document.getElementById('EUPassword').value = pw;
+          }
+        </script>
+        <!-- Edit Model Get Function End-->
+
+  <!-- Edit Model End -->
 
 
 
@@ -88,6 +127,7 @@
                   <thead>
                   <tr>
                     <th scope="col">User ID</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Password</th>
                     <th style="width:  12%">Action</th>
@@ -100,19 +140,21 @@
                         <td>{{$use->id}}</td>
                         <td>{{$use->name}}</td>
                         <td>{{$use->email}}</td>
-                        <td><b><center><i class='fas fa-eye-slash'></i></center></b></td> <!-- {{$use->password}} -->
+                        <td><b>Hiddne</b></td> 
                         <td>
                           <input type="hidden" id="id<?php echo $k; ?>" value="{{$use->id}}">
                           <input type="hidden" id="name<?php echo $k; ?>" value="{{$use->name}}">
                           <input type="hidden" id="email<?php echo $k; ?>" value="{{$use->email}}">
                           <input type="hidden" id="pw<?php echo $k; ?>" value="{{$use->password}}">
                             
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#DeleteUser">Delete</button>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" onclick="edit(<?php echo $k; ?>)" data-target="#EditUser">Edit</button>
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#DeleteUser">Delete</button>
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" onclick="edit(<?php echo $k; ?>)" data-bs-target="#EditUser">Edit</button>
                         </td>
                       </tr>
                       <?php $k++; ?>
                         <!-- Delete Conformation Model Start -->
+                        
+                        
                         <div class="modal fade" id="DeleteUser">
                                 <div class="modal-dialog modal-sm">
                                   <div class="modal-content">
@@ -126,7 +168,7 @@
                                       <p><b>Are you sure you want to delete?</b></p>
                                     </div>
                                     <div class="modal-footer justify-content-between">
-                                      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">No</button>
+                                      <button type="button" class="btn btn-default btn-sm" data-bs-dismiss="modal">No</button>
                                       <a  href="{{route('deleteuser',$use->id)}}" class="btn btn-danger btn-sm">Yes</a> <!-- $cls->id = passing variable-->
                                     </div>
                                   </div>
@@ -141,6 +183,7 @@
                   <tfoot>
                   <tr>
                     <th scope="col">User ID</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Password</th>
                     <th style="width:  12%">Action</th>

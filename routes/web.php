@@ -27,6 +27,5 @@ Route::get('/HomePage',[MyController::class, 'HomePage']);
 //Data Connection= Users Table ============================================
 Route::post('adduser',[MyController::class,'adduser']);
 Route::post('edituser',[MyController::class,'edituser']);
-Route::get('changeusersstatus/{c}',[MyController::class, 'changeusersstatus'])->name('changeusersstatus'); //Active Deactive Button
 Route::get('deleteuser/{c}',[MyController::class,'deleteuser'])->name('deleteuser'); //{c} = Passing variable
 //=========================================================================

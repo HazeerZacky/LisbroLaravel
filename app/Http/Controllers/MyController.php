@@ -82,4 +82,58 @@ class MyController extends Controller
 
         return redirect()->back();
     }
+
+    public function edituser(Request $req) { //EDIT USER =======================
+
+        // $a = session()->getId();
+            
+        //     if(session()->get('session') != $a ){
+        //         return redirect('/login')->with('msg','Login First');
+        //     }
+
+        // $req->validate([
+        //     'EUName'=>'required',
+        //     'EUEmail'=>'required|min:12',
+        //     'EUPassword'=>'required|min:8',
+        //     'EUSubject'=>'required',
+        //     'EURole'=>'required',
+        // ],[
+        //     //User name Add
+        //     'EUName.required'=>'User Name is must',
+        //     //User Email Add
+        //     'EUEmail.required'=>'User E-mail is must',
+        //     'EUEmail.min'=>'User E-mail Minimum 12 letters must',
+        //     //User Password Add
+        //     'EUPassword.required'=>'User Password is must',
+        //     'EUPassword.min'=>'User Name Password Minimum 8 letters must',
+        //     //User Subject Add
+        //     'EUSubject.required'=>'Please select a class',
+        //     //User Role Add
+        //     'EURole.required'=>'Please select a role',
+        // ]);
+
+        $hash = Hash::make($req->EUPassword);
+
+        DB::table('users')->where('id' , $req->EUID)->update([
+
+            'name' => $req->EUName,
+            'email' => $req->EUEmail,
+            'password' => $hash
+        ]);
+
+        $notification = array(
+            'message' => 'Successfully Updated', 
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function deleteuser($i){  //DELETE USER ==========================
+
+        DB::table('users')->where('id',$i)->delete();
+        
+
+        return redirect()->back();
+    }
 }
