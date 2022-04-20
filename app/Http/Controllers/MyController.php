@@ -136,4 +136,30 @@ class MyController extends Controller
 
         return redirect()->back();
     }
+
+
+    public function log(Request $req) { //Login Function
+        $user = DB::table('users')->where('email',$req->email)->first();
+        if($user){
+            if(Hash::check($req->password ,$user->password )){
+                session()->regenerate();
+                $sid = session()->getId();
+                session(['session'=>$sid]);
+                session(['userid'=>$user->id]);
+                return redirect()->route('HomePage',['c'=>$user->id]);
+            }   else{
+                    $notification = array(
+                        'message' =>'Password wrong', 
+                        'alert-type' => 'warning'
+                );
+                return redirect()->back()->with($notification);
+            }
+        }   else{
+                $notification = array(
+                    'message' =>'User does not exist', 
+                    'alert-type' => 'warning'
+            );
+            return redirect()->back()->with($notification);
+        }
+    }
 }

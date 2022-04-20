@@ -19,9 +19,9 @@ use App\Http\Controllers\MyController;
 //     return view('welcome');
 // });
 
-Route::get('/',[MyController::class, 'HomePage']);
-// Route::get('/',[MyController::class, 'LoginPage']);
-Route::get('/HomePage',[MyController::class, 'HomePage']);
+//Route::get('/',[MyController::class, 'HomePage']);
+Route::get('/',[MyController::class, 'LoginPage']);
+Route::get('/HomePage',[MyController::class, 'HomePage'])->name('HomePage');
 
 
 //Data Connection= Users Table ============================================
@@ -29,3 +29,5 @@ Route::post('adduser',[MyController::class,'adduser']);
 Route::post('edituser',[MyController::class,'edituser']);
 Route::get('deleteuser/{c}',[MyController::class,'deleteuser'])->name('deleteuser'); //{c} = Passing variable
 //=========================================================================
+
+Route::post('/log',[MyController::class, 'log']); //Login Function

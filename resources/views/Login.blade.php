@@ -13,12 +13,13 @@
 
 <body>
     <div class="text-center mt-5">
-        <form style="max-width:480px; margin:auto;">
+        <form style="max-width:480px; margin:auto;" action="/log" method="post">
+        @csrf
             <h1 class="mt-4">Please sign in</h1>
-            <input type="email" name="emailAddress" id="emailAddress" class="form-control mt-3" placeholder="Email Address" required autofocus>
+            <input type="email" name="email" id="emailAddress" class="form-control mt-3" placeholder="Email Address" required autofocus>
             <input type="password" name="password" id="password" class="form-control mt-3" placeholder="Password" required>
             <div class="d-grid gap-2 mt-3">
-                <button class="btn btn-primary" type="button">Sign In</button>
+                <button class="btn btn-primary" type="submit">Sign In</button>
             </div>
         </form>
     </div>
