@@ -11,11 +11,21 @@ use App\Models\User;
 class MyController extends Controller
 {
     //==========================================================    Navigation parts Start   =======================
-    public function HomePage(){ //Home Page 
+    public function HomePage($id){ //Home Page 
+
+        $a = session()->getId();
+                
+                if(session()->get('session') != $a ){
+                    return redirect('/')->with('msg','Login First');
+                }
+    
+                $user = DB::table('users')->where('id',$id)->first();
+                $users = DB::table('users')->get();  //Get All class table contants from class table(DB)
+                return view('Home',compact('users','user'));
 
         // $user = DB::table('users')->where('id',$id)->first();
-        $users = DB::table('users')->get();  //Get All class table contants from class table(DB)
-        return view('Home', compact('users'));
+        // $users = DB::table('users')->get();  //Get All class table contants from class table(DB)
+        // return view('Home', compact('users'));
     }
 
 
@@ -39,36 +49,27 @@ class MyController extends Controller
 
 
     public function adduser(Request $req){  //Daa USER ======================
-        // $a = session()->getId();
+        $a = session()->getId();
             
-        //     if(session()->get('session') != $a )
-        //     {
-        //         return redirect('/login')->with('msg','Login First');
-        //     }
+            if(session()->get('session') != $a )
+            {
+                return redirect('/')->with('msg','Login First');
+            }
 
-        // $req->validate([
-        //     'UName'=>'required',
-        //     'UEmail'=>'required|min:11',
-        //     'UPassword'=>'required|min:8',
-        //     'USubject'=>'required', //Nullable
-        //     'URole'=>'required',
-        //     'UStatus'=>'required',
-        // ],[
-        //     //User name Add
-        //     'UName.required'=>'User Name is must',
-        //     //User Email Add
-        //     'UEmail.required'=>'User E-mail is must',
-        //     'UEmail.min'=>'User E-mail Minimum 12 letters must',
-        //     //User Password Add
-        //     'UPassword.required'=>'User Password is must',
-        //     'UPassword.min'=>'User Name Password Minimum 8 letters must',
-        //     //User Subject Add
-        //     // 'USubject.required'=>'Please select a class', NULLable
-        //     //User Role Add
-        //     'URole.required'=>'Please select a role',
-        //      //User Status Add
-        //     'UStatus.required'=>'Please select a status',
-        // ]);
+        $req->validate([
+            'UName'=>'required',
+            'UEmail'=>'required|min:11',
+            'UPassword'=>'required|min:8',
+        ],[
+            //User name Add
+            'UName.required'=>'User Name is must',
+            //User Email Add
+            'UEmail.required'=>'User E-mail is must',
+            'UEmail.min'=>'User E-mail Minimum 12 letters must',
+            //User Password Add
+            'UPassword.required'=>'User Password is must',
+            'UPassword.min'=>'User Name Password Minimum 8 letters must',
+        ]);
 
         $cnt = count(DB::table('users')->get());
         
@@ -79,38 +80,36 @@ class MyController extends Controller
 
         $use->save();
 
+        $notification = array(
+            'message' => 'Successfully Saved', 
+            'alert-type' => 'success'
+        );
 
-        return redirect()->back();
+        return redirect()->back()->with($notification);
     }
 
     public function edituser(Request $req) { //EDIT USER =======================
 
-        // $a = session()->getId();
+        $a = session()->getId();
             
-        //     if(session()->get('session') != $a ){
-        //         return redirect('/login')->with('msg','Login First');
-        //     }
+            if(session()->get('session') != $a ){
+                return redirect('/')->with('msg','Login First');
+            }
 
-        // $req->validate([
-        //     'EUName'=>'required',
-        //     'EUEmail'=>'required|min:12',
-        //     'EUPassword'=>'required|min:8',
-        //     'EUSubject'=>'required',
-        //     'EURole'=>'required',
-        // ],[
-        //     //User name Add
-        //     'EUName.required'=>'User Name is must',
-        //     //User Email Add
-        //     'EUEmail.required'=>'User E-mail is must',
-        //     'EUEmail.min'=>'User E-mail Minimum 12 letters must',
-        //     //User Password Add
-        //     'EUPassword.required'=>'User Password is must',
-        //     'EUPassword.min'=>'User Name Password Minimum 8 letters must',
-        //     //User Subject Add
-        //     'EUSubject.required'=>'Please select a class',
-        //     //User Role Add
-        //     'EURole.required'=>'Please select a role',
-        // ]);
+        $req->validate([
+            'EUName'=>'required',
+            'EUEmail'=>'required|min:12',
+            'EUPassword'=>'required|min:8',
+        ],[
+            //User name Add
+            'EUName.required'=>'User Name is must',
+            //User Email Add
+            'EUEmail.required'=>'User E-mail is must',
+            'EUEmail.min'=>'User E-mail Minimum 12 letters must',
+            //User Password Add
+            'EUPassword.required'=>'User Password is must',
+            'EUPassword.min'=>'User Name Password Minimum 8 letters must',
+        ]);
 
         $hash = Hash::make($req->EUPassword);
 
@@ -131,10 +130,19 @@ class MyController extends Controller
 
     public function deleteuser($i){  //DELETE USER ==========================
 
+        $a = session()->getId();
+            
+            if(session()->get('session') != $a ){
+                return redirect('/')->with('msg','Login First');
+            }
         DB::table('users')->where('id',$i)->delete();
         
+        $notification = array(
+            'message' => 'Successfully Deleted', 
+            'alert-type' => 'success'
+        );
 
-        return redirect()->back();
+        return redirect()->back()->with($notification);
     }
 
 
@@ -161,5 +169,12 @@ class MyController extends Controller
             );
             return redirect()->back()->with($notification);
         }
+    }
+
+    public function logout(){ //Logout
+        session()->flush();
+        session()->regenerate();
+        return view('Login');
+    
     }
 }

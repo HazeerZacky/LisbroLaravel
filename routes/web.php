@@ -21,7 +21,7 @@ use App\Http\Controllers\MyController;
 
 //Route::get('/',[MyController::class, 'HomePage']);
 Route::get('/',[MyController::class, 'LoginPage']);
-Route::get('/HomePage',[MyController::class, 'HomePage'])->name('HomePage');
+Route::get('/HomePage/{c}',[MyController::class, 'HomePage'])->name('HomePage');
 
 
 //Data Connection= Users Table ============================================
@@ -31,3 +31,5 @@ Route::get('deleteuser/{c}',[MyController::class,'deleteuser'])->name('deleteuse
 //=========================================================================
 
 Route::post('/log',[MyController::class, 'log']); //Login Function
+Route::get('logout/',[MyController::class, 'logout']);  //Logout
+
