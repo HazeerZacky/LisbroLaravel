@@ -16,7 +16,11 @@ class MyController extends Controller
         $a = session()->getId();
                 
                 if(session()->get('session') != $a ){
-                    return redirect('/')->with('msg','Login First');
+                    $notification = array(
+                        'message' => 'Please login first', 
+                        'alert-type' => 'info'
+                    );
+                    return redirect('/')->with($notification);
                 }
     
                 $user = DB::table('users')->where('id',$id)->first();
@@ -30,7 +34,19 @@ class MyController extends Controller
 
 
     public function LoginPage(){ //Home Page 
-        return view('Login');
+
+        $a = session()->getId();
+                
+                if(session()->get('session') == $a ){
+
+                    $notification = array(
+                        'message' => 'You are already logged in', 
+                        'alert-type' => 'info'
+                    );
+                    return redirect('/HomePage/{c}')->with($notification);
+                }
+                
+        return view('Login')->with('msg','Login First');
     }
 
 
@@ -39,7 +55,11 @@ class MyController extends Controller
             
             if(session()->get('session') != $a )
             {
-                return redirect('/login')->with('msg','Login First');
+                $notification = array(
+                    'message' => 'Please login first', 
+                    'alert-type' => 'info'
+                );
+                return redirect('/login')->with($notification);
             }
 
         $us = DB::table('users')->get();
@@ -53,7 +73,11 @@ class MyController extends Controller
             
             if(session()->get('session') != $a )
             {
-                return redirect('/')->with('msg','Login First');
+                $notification = array(
+                    'message' => 'Please login first', 
+                    'alert-type' => 'info'
+                );
+                return redirect('/')->with($notification);
             }
 
         $req->validate([
@@ -93,7 +117,11 @@ class MyController extends Controller
         $a = session()->getId();
             
             if(session()->get('session') != $a ){
-                return redirect('/')->with('msg','Login First');
+                $notification = array(
+                    'message' => 'Please login first', 
+                    'alert-type' => 'info'
+                );
+                return redirect('/')->with($notification);
             }
 
         $req->validate([
@@ -154,7 +182,11 @@ class MyController extends Controller
                 $sid = session()->getId();
                 session(['session'=>$sid]);
                 session(['userid'=>$user->id]);
-                return redirect()->route('HomePage',['c'=>$user->id]);
+                $notification = array(
+                    'message' =>'successfully logged in', 
+                    'alert-type' => 'success'
+            );
+                return redirect()->route('HomePage',['c'=>$user->id])->with($notification);
             }   else{
                     $notification = array(
                         'message' =>'Password wrong', 
@@ -174,7 +206,11 @@ class MyController extends Controller
     public function logout(){ //Logout
         session()->flush();
         session()->regenerate();
-        return view('Login');
+        $notification = array(
+            'message' =>'Successfully logged out', 
+            'alert-type' => 'success'
+        );
+        return redirect()->route('Login')->with($notification);
     
     }
 }

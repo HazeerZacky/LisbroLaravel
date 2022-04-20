@@ -17,6 +17,9 @@
     <!-- toastr -->
   	<link rel="stylesheet" type="text/css" href="{{asset('plugins')}}/toastr/toastr.min.css">
     <script src="{{asset('plugins')}}/toastr/toastr.min.js"></script>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <title>Test</title>
 </head>
 
@@ -127,8 +130,7 @@
                 <div class="row">
                             <div class="col-md-12 text-end">
                               <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddClass">Add New Class</button>
-                              <!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" onclick="/logout">Logout</button> -->
-                              <a href="/logout" class="btn btn-success">Logout</a>
+                              <a href="/logout" class="btn btn-dark">Logout</a>
                             </div>
                 </div>
                 <br>
@@ -170,8 +172,7 @@
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <h4 class="modal-title">&#11088;Delete Confirmation</h4>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                       </button>
                                     </div>
                                     <div class="modal-body">

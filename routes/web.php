@@ -20,7 +20,7 @@ use App\Http\Controllers\MyController;
 // });
 
 //Route::get('/',[MyController::class, 'HomePage']);
-Route::get('/',[MyController::class, 'LoginPage']);
+Route::get('/',[MyController::class, 'LoginPage'])->name('Login');
 Route::get('/HomePage/{c}',[MyController::class, 'HomePage'])->name('HomePage');
 
 
