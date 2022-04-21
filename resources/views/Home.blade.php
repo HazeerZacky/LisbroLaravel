@@ -1,23 +1,19 @@
 <!doctype html>
-<html lang="en">
-
+<html>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <!-- Font Awsome -->
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="{{asset('plugins')}}/bootstrap/css/bootstrap.min.css" >
     <script src="{{asset('plugins')}}/bootstrap/js/bootstrap.bundle.min.js" ></script>
-
     <!-- jquery -->
     <script src="{{asset('plugins')}}/jquery/jquery.min.js"></script>
-
     <!-- toastr -->
   	<link rel="stylesheet" type="text/css" href="{{asset('plugins')}}/toastr/toastr.min.css">
     <script src="{{asset('plugins')}}/toastr/toastr.min.js"></script>
-
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <title>Test</title>
@@ -39,26 +35,25 @@
                     <form role="form" action="/adduser" method="post">
                     @csrf
                         <div class="form-group">
-                        <label for="exampleInputEmail1" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="UName" id="exampleInputName">
+                          <label for="exampleInputEmail1" class="form-label">Name</label>
+                          <input type="text" class="form-control" name="UName" id="exampleInputName">
                         </div>
                         <div class="form-group">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" name="UEmail" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          <label for="exampleInputEmail1" class="form-label">Email address</label>
+                          <input type="email" class="form-control" name="UEmail" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
                         <div class="form-group">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
                         <input type="password" class="form-control" name="UPassword" id="exampleInputPassword1">
                         </div>
                         </div>
-                                <div class="modal-footer">
-                                    
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                </div> 
+                              <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary">Save changes</button>
+                              </div> 
                             </div>
                     </form>
-            
+            <!-- form End -->
         </div>
         </div>
   <!-- Add Model End -->
@@ -128,7 +123,7 @@
               <div class="card-body">
                 <!-- Add Button Part Start -->
                 <div class="row">
-                            <div class="col-md-12 text-end">
+                            <div class="col-md-12">
                               <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddClass">Add New Class</button>
                               <a href="/logout" class="btn btn-dark">Logout</a>
                             </div>
