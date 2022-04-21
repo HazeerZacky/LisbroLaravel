@@ -12,9 +12,8 @@ class MyController extends Controller
 {
     //==========================================================    Navigation parts Start   =======================
     public function HomePage($id){ //Home Page 
-
         $a = session()->getId();
-                
+
                 if(session()->get('session') != $a ){
                     $notification = array(
                         'message' => 'Please login first', 
@@ -22,23 +21,17 @@ class MyController extends Controller
                     );
                     return redirect('/')->with($notification);
                 }
-    
                 $user = DB::table('users')->where('id',$id)->first();
-                $users = DB::table('users')->get();  //Get All class table contants from class table(DB)
-                return view('Home',compact('users','user'));
+                $users = DB::table('users')->get();
 
-        // $user = DB::table('users')->where('id',$id)->first();
-        // $users = DB::table('users')->get();  //Get All class table contants from class table(DB)
-        // return view('Home', compact('users'));
+        return view('Home',compact('users','user'));
     }
 
 
-    public function LoginPage(){ //Home Page 
+    public function LoginPage(){ //Login Page 
+        $a = session()->getId();   
 
-        $a = session()->getId();
-                
                 if(session()->get('session') == $a ){
-
                     $notification = array(
                         'message' => 'You are already logged in', 
                         'alert-type' => 'info'
@@ -49,10 +42,13 @@ class MyController extends Controller
         return view('Login')->with('msg','Login First');
     }
 
+    //==========================================================    Navigation parts End   =======================
+
+    //===========================================================    User Function Start   =======================
 
     public function getusers(){
         $a = session()->getId();
-            
+
             if(session()->get('session') != $a )
             {
                 $notification = array(
@@ -61,16 +57,15 @@ class MyController extends Controller
                 );
                 return redirect('/login')->with($notification);
             }
-
         $us = DB::table('users')->get();
 
         return view('viewusers',compact('us'));
     }
 
 
-    public function adduser(Request $req){  //Daa USER ======================
+    public function adduser(Request $req){
         $a = session()->getId();
-            
+
             if(session()->get('session') != $a )
             {
                 $notification = array(
@@ -112,7 +107,7 @@ class MyController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function edituser(Request $req) { //EDIT USER =======================
+    public function edituser(Request $req) {
 
         $a = session()->getId();
             
@@ -156,7 +151,7 @@ class MyController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function deleteuser($i){  //DELETE USER ==========================
+    public function deleteuser($i){
 
         $a = session()->getId();
             
@@ -173,9 +168,12 @@ class MyController extends Controller
         return redirect()->back()->with($notification);
     }
 
+    //===========================================================    User Function End   =======================
+
 
     public function log(Request $req) { //Login Function
         $user = DB::table('users')->where('email',$req->email)->first();
+
         if($user){
             if(Hash::check($req->password ,$user->password )){
                 session()->regenerate();
@@ -203,7 +201,7 @@ class MyController extends Controller
         }
     }
 
-    public function logout(){ //Logout
+    public function logout(){ //Logout Function
         session()->flush();
         session()->regenerate();
         $notification = array(
@@ -211,6 +209,5 @@ class MyController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->route('Login')->with($notification);
-    
     }
 }
