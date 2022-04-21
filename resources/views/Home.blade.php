@@ -1,58 +1,56 @@
 <!doctype html>
-<html>
+<html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Font Awsome -->
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset('plugins')}}/bootstrap/css/bootstrap.min.css" >
     <script src="{{asset('plugins')}}/bootstrap/js/bootstrap.bundle.min.js" ></script>
     <!-- jquery -->
     <script src="{{asset('plugins')}}/jquery/jquery.min.js"></script>
+
     <!-- toastr -->
   	<link rel="stylesheet" type="text/css" href="{{asset('plugins')}}/toastr/toastr.min.css">
     <script src="{{asset('plugins')}}/toastr/toastr.min.js"></script>
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <title>Test</title>
 </head>
 
 <body>
+
   <!-- Model Start   -->
   <!-- Add Model Start -->
   <div class="modal fade" id="AddClass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">&#9776; User Add Form</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <!-- form start -->
-                      <form role="form" action="/adduser" method="post">
-                          @csrf
-                          <div class="form-group">
-                            <label for="exampleInputEmail1" class="form-label">Name</label>
-                            <input type="text" class="form-control" name="UName" id="exampleInputName">
-                          </div>
-                          <div class="form-group">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" name="UEmail" id="exampleInputEmail1" aria-describedby="emailHelp">
-                          </div>
-                          <div class="form-group">
-                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control" name="UPassword" id="exampleInputPassword1">
-                          </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="submit" class="btn btn-primary">Save changes</button>
-                            </div> 
-                          </div>
-                      </form>
-                <!-- form End -->
-              </div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">&#9776; User Add Form</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- form start -->
+                    <form role="form" action="/adduser" method="post">
+                    @csrf
+                        <div class="form-group">
+                          <label for="exampleInputEmail1" class="form-label">Name</label>
+                          <input type="text" class="form-control" name="UName" id="exampleInputName">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1" class="form-label">Email address</label>
+                          <input type="email" class="form-control" name="UEmail" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1" class="form-label">Password</label>
+                          <input type="password" class="form-control" name="UPassword" id="exampleInputPassword1">
+                        </div>                    
+                        <div class="modal-footer">       
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>  
+                    </form>
+            </div>
             </div>
         </div>
   </div>
@@ -69,7 +67,7 @@
               </div>
               <div class="modal-body">
                 <!-- form start -->
-                    <form role="form" action="/edituser" method="post">
+                      <form role="form" action="/edituser" method="post">
                       @csrf
                           <div class="form-group">
                               <label for="exampleInputText" class="form-label">ID</label>
@@ -90,10 +88,10 @@
                           <div class="modal-footer">
                               <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
                               <button type="submit" class="btn btn-primary">Save changes</button>
-                          </div>  
-                    </form>
+                          </div> 
+                      </form>
               </div>
-            </div>
+              </div>
         </div>
   </div>
 
@@ -104,6 +102,7 @@
       var name = document.getElementById('name' +i).value;
       var email = document.getElementById('email' +i).value;
       var pw = document.getElementById('pw' +i).value;
+
 
       document.getElementById('EUID').value = id;
       document.getElementById('EUName').value = name;
@@ -137,7 +136,7 @@
           </tr>
           </thead>
           <tbody>
-            <?php $k = 0; ?>
+            <?php $k = 0; ?> <!-- identify row number -->
               @foreach($users as $use)
               <tr>
                 <td>{{$use->id}}</td>
@@ -157,25 +156,25 @@
               <?php $k++; ?>
                 <!-- Delete Conformation Model Start -->
                 <div class="modal fade" id="DeleteUser">
-                  <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4 class="modal-title">&#11088;Delete Confirmation</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal-dialog modal-sm">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 class="modal-title">&#11088;Delete Confirmation</h4>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p><b>Are you sure you want to delete?</b></p>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                              <button type="button" class="btn btn-default btn-sm" data-bs-dismiss="modal">No</button>
+                              <a  href="{{route('deleteuser',$use->id)}}" class="btn btn-danger btn-sm">Yes</a> <!-- $cls->id = passing variable-->
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="modal-body">
-                        <p><b>Are you sure you want to delete?</b></p>
-                      </div>
-                      <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default btn-sm" data-bs-dismiss="modal">No</button>
-                        <a  href="{{route('deleteuser',$use->id)}}" class="btn btn-danger btn-sm">Yes</a> <!-- $cls->id = passing variable-->
-                      </div>
-                    </div>
-                    <!-- /.modal-content -->
-                  </div>
-                  <!-- /.modal-dialog -->
-                </div>
-                <!-- Delete Conformation Model End-->
+                      <!-- /.modal -->
+                  <!-- Delete Conformation Model End-->
               @endforeach
           </tbody>
           <tfoot>
@@ -191,7 +190,9 @@
       </div>
     </div>
   
+
     <!-- Alert Part Start -->
+
     @if(Session::has('message'))
     <script>
       var type = "{{ Session::get('alert-type', 'info') }}";
@@ -199,26 +200,30 @@
           case 'info':
               toastr.info("{{ Session::get('message') }}");
               break;
+          
           case 'warning':
               toastr.warning("{{ Session::get('message') }}");
               break;
+
           case 'success':
               toastr.success("{{ Session::get('message') }}");
               break;
+
           case 'error':
               toastr.error("{{ Session::get('message') }}");
               break;
       }
-      </script>
-      @endif
+    </script>
+    @endif
 
-      @if($errors->any())
-        @foreach($errors->all()  as $error)
-        <script>
-          toastr.info("{{$error}}");
-        </script>
-        @endforeach
-      @endif
+    @if($errors->any())
+      @foreach($errors->all()  as $error)
+      <script>
+        toastr.info("{{$error}}");
+      </script>
+      @endforeach
+    @endif
 <!-- Alert Part End -->
 </body>
+
 </html>
